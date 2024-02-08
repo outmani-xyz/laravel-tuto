@@ -10,17 +10,9 @@
     <ul class="menu">
         <li><a class="{{ request()->routeIs('home') ? 'active':'' }}" href="{{ route('home') }}">Home</a></li>
         <li><a class="{{ request()->routeIs('posts.create') ? 'active':'' }}" href="{{ route('posts.create') }}">post create</a></li>
-    </ul>
-
-    @if (session('success'))
-        <div class="message">{{ session('success') }}</div>
-    @endif
-
-    @if ($errors->any())
-        @foreach($errors->all() as $error)
-            <div class="error-message">{{ $error }}</div>
-        @endforeach
-    @endif
+    </ul> 
+    @includeWhen(session('success'),'_success')
+    @includeWhen($errors->any(),'_errors')
 
     @yield('content')
 </body>
