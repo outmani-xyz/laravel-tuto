@@ -20,17 +20,20 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home', ['name' => 'hamid']);
 })->name('home');
-Route::get('/posts/create', function () {
-    return view(('create'));
-})->name('posts.create');
-Route::post('/posts/store', function (Request $request) {
+Route::name('posts.')->prefix('posts')->group(function(){
+    Route::get('/create', function () {
+        return view(('posts.create'));
+    })->name('create');
+    Route::post('/store', function (Request $request) {
+    
+    
+        $request->validate([
+            'title' => 'required',
+            'description' => ['required', 'min:10']
+        ]);
+        return redirect()->route('posts.create')
+            ->with('success', 'the title: ' . $request->input('title') .
+                ', desc: ' . $request->input('description'));
+    })->name('store');
 
-
-    $request->validate([
-        'title' => 'required',
-        'description' => ['required', 'min:10']
-    ]);
-    return redirect()->route('posts.create')
-        ->with('success', 'the title: ' . $request->input('title') .
-            ', desc: ' . $request->input('description'));
-})->name('posts.store');
+});
