@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,23 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('home', function () {
-    return view('home', ['name' => 'hamid']);
-})->name('home');
-Route::name('posts.')->prefix('posts')->group(function(){
-    Route::get('/create', function () {
-        return view(('posts.create'));
-    })->name('create');
-    Route::post('/store', function (Request $request) {
-    
-    
-        $request->validate([
-            'title' => 'required',
-            'description' => ['required', 'min:10']
-        ]);
-        return redirect()->route('posts.create')
-            ->with('success', 'the title: ' . $request->input('title') .
-                ', desc: ' . $request->input('description'));
-    })->name('store');
+Route::get('home', [HomeController::class, 'home'])->name('home');
 
-});
+Route::resource('posts',PostController::class)->except(['index']);
+ 
