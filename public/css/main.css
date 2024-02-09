@@ -1,4 +1,8 @@
 
+.container{
+    max-width: 1024px;
+    margin: auto;
+}
 .menu{
     display: flex;
     list-style: none;
@@ -26,4 +30,11 @@ form{
     flex-direction: column;
     gap: 10px;
     max-width: 400px;
+}
+
+.post-item{
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 5px #000000;
+    padding: 15px;
+    border-radius: 5px;
 }
