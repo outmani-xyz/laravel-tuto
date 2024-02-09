@@ -1,40 +1,58 @@
-
-.container{
+.container {
     max-width: 1024px;
     margin: auto;
 }
-.menu{
+
+.menu {
     display: flex;
     list-style: none;
 }
-.menu li{
+
+.menu li {
     padding: 5px 20px;
 }
-a.active{
+
+a.active {
     color: rgb(207, 146, 12);
 }
 
-.message{
+.message {
     background-color: beige;
     padding: 10px;
     border-radius: 15px;
 }
-.error-message{
+
+.error-message {
     background-color: brown;
 }
-.error{
+
+.error {
     color: brown;
 }
-form{
+
+form {
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-width: 400px;
 }
 
-.post-item{
+.post-item form{
+    display: initial;
+}
+
+.post-item {
     margin-bottom: 10px;
     box-shadow: 0px 0px 5px #000000;
     padding: 15px;
     border-radius: 5px;
+}
+
+.btn{
+    background-color: bisque;
+    padding: 5px;
+    border: solid black;
+    font-size: 16px;
+    outline: none;
+    text-decoration: none;
 }

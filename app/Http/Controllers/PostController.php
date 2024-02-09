@@ -43,7 +43,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('posts.show',['post'=>Post::findOrFail($id)]);
     }
 
     /**
@@ -51,7 +51,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('posts.edit',['post'=>Post::findOrFail($id)]);
     }
 
     /**
@@ -59,7 +59,20 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $request->validate([
+            'title' => 'required',
+            'description' => ['required', 'min:10']
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post->title = $request->input('title');
+        $post->description = $request->input('description');
+
+        $post->save();
+
+        return redirect()->route('home')
+            ->with('success', 'the post updated. ') ;
     }
 
     /**
